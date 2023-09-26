@@ -9,6 +9,7 @@ import org.develop.model.Temperatura;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class ReadCSVAemet {
     public ArrayList<Day> readFile(String nomFinch){
          path= Paths.get("").toAbsolutePath().toString() + File.separator + "data" + File.separator + nomFinch;
         ArrayList<Day> days = new ArrayList<Day>();
+        System.out.println(nomFinch.substring(5,13));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         Day day = new Day();
-        day.setDate(LocalDateTime.parse(nomFinch.substring(5,13),formatter));
+        day.setDate(LocalDate.parse(nomFinch.substring(5,13),formatter));
 
         try (CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))){
             String[] line;
+
             //Saltamos la primera linea con la información
             reader.readNext();
 

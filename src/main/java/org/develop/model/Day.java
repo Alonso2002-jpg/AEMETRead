@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Data
 public class Day {
 
-    private LocalDateTime date;
-    ArrayList<Provincia> provincias;
+    private LocalDate date;
+    ArrayList<Provincia> provincias=new ArrayList<Provincia>();
 
 }

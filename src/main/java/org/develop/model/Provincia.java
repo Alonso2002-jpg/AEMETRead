@@ -7,6 +7,6 @@ import java.util.ArrayList;
 @Data
 public class Provincia  {
     private String name;
-    ArrayList<Localidad> localities;
+    ArrayList<Localidad> localities = new ArrayList<Localidad>();
 
 }
