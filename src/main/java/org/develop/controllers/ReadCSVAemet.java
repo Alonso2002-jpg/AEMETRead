@@ -16,15 +16,17 @@ import java.util.ArrayList;
 
 public class ReadCSVAemet {
     String path;
-    public ArrayList<Day> reafFile(String nomFinch){
+    public ArrayList<Day> readFile(String nomFinch){
          path= Paths.get("").toAbsolutePath().toString() + File.separator + "data" + File.separator + nomFinch;
         ArrayList<Day> days = new ArrayList<Day>();
+        System.out.println(nomFinch.substring(5,13));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         Day day = new Day();
         day.setDate(LocalDate.parse(nomFinch.substring(5,13),formatter));
 
         try (CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))){
             String[] line;
+
             //Saltamos la primera linea con la información
             reader.readNext();
 
@@ -69,7 +71,7 @@ public class ReadCSVAemet {
 
     public static void main(String[] args) {
         ReadCSVAemet recv = new ReadCSVAemet();
-        Day dia = recv.reafFile("Aemet20171029.csv").get(0);
+        Day dia = recv.readFile("Aemet20171029.csv").get(0);
         dia.getProvincias().forEach(System.out::println);
     }
 }
