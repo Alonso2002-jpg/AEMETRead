@@ -1,4 +1,4 @@
-package org.develop.services;
+package org.develop.services.database;
 
 
 import org.apache.ibatis.jdbc.ScriptRunner;
