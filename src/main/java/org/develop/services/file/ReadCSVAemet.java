@@ -43,7 +43,7 @@ public class ReadCSVAemet {
                 }
             }
         }catch (IOException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (CsvValidationException e) {
             throw new RuntimeException(e);
         }
@@ -51,11 +51,11 @@ public class ReadCSVAemet {
         return tempXDay;
     }
 
-    public ArrayList<List<Aemet>> readFilesDays() {
-        ArrayList<List<Aemet>> days = new ArrayList<>();
-        days.add(readFile("Aemet20171029.csv"));
-        days.add(readFile("Aemet20171030.csv"));
-        days.add(readFile("Aemet20171031.csv"));
+    public ArrayList<Aemet> readFilesDays() {
+        ArrayList<Aemet> days = new ArrayList<>();
+        days.addAll(readFile("Aemet20171029.csv"));
+        days.addAll(readFile("Aemet20171030.csv"));
+        days.addAll(readFile("Aemet20171031.csv"));
         return days;
     }
 

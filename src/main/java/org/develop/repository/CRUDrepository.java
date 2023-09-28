@@ -24,8 +24,5 @@ public interface CRUDrepository<T,ID> {
     // Borrar todos
     void deleteAll() throws SQLException;
 
-    // Hacer Backup
-    boolean backup(String file) throws SQLException;
-
 
 }

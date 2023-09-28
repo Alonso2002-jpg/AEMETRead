@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS AEMET;
 CREATE TABLE IF NOT EXISTS AEMET (
                                  Actual_Date DATE NOT NULL,

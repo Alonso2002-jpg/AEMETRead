@@ -161,14 +161,29 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         }
     }
 
-    @Override
-    public boolean backup(String file) throws SQLException {
-
-        return false;
-    }
 
     @Override
     public List<Aemet> findByName(String name) {
-        return null;
+        logger.debug("Finding by name: " + name);
+        String SQLquery = "SELECT * FROM Aemet WHERE name: ?";
+        List<Aemet> rsList = new ArrayList<Aemet>();
+        try (var conn = db.getConnection(); var stmt = conn.prepareStatement(SQLquery)){
+            var rs = stmt.executeQuery();
+            while (rs.next()){
+                Aemet aemet = new Aemet();
+                aemet.setId(rs.getInt("id"));
+                aemet.setActualDate(Date.valueOf(rs.getString("actualDate")).toLocalDate());
+                aemet.setProvincia(rs.getString("provincia"));
+                aemet.setLocalidad(rs.getString("localidad"));
+                aemet.setMaxDegrees(rs.getDouble("maxDegrees"));
+                aemet.setMinDegrees(rs.getDouble("minDegrees"));
+                aemet.setMaxTempHour(rs.getString("maxTempHour"));
+                aemet.setMinTempHour(rs.getString("minTempHour"));
+                rsList.add(aemet);
+            }
+        }catch (SQLException e){
+            logger.error("Error while getting by name: " + e.getMessage(),e);
+        }
+        return rsList;
     }
 }
