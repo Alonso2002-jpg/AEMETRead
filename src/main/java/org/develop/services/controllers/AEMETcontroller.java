@@ -9,10 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AEMETcontroller {
 
@@ -67,11 +64,15 @@ public class AEMETcontroller {
                 );
     }
 
-    public Map<String,Map<LocalDate,Double>> averageTempXProvDay(){
+    public Map<String, Double> averageTempXProvDay(){
+
         return temps.stream()
                 .collect(Collectors.groupingBy(
                         Aemet::getProvincia,
-                        Collectors.toMap(Aemet::getActualDate,t->temps.stream().mapToDouble(a-> t.getMaxDegrees()+t.getMinDegrees()).average().orElse(Double.NaN))
+                        Collectors.collectingAndThen(
+                        Collectors.mapping(a -> a.getMaxDegrees() + a.getMinDegrees(), Collectors.toList()),
+                        list -> list.stream().mapToDouble(Double::doubleValue).average().orElse(0.0)
+                        )
                 ));
     }
     public Optional<Aemet> maxPrecipitation(){
@@ -91,6 +92,7 @@ public class AEMETcontroller {
 //        System.out.println("------------------------------------------------");
 //        ae.minTempXProvDay().forEach((a,b)-> System.out.println(a + " " + b));
 //        ae.averageTempXProvDay().forEach((a,b)-> System.out.println(a + " " + b));
-        ae.maxminTempXDay();
+//        ae.maxminTempXDay();
+        ae.averageTempXProvDay().forEach((a,b)-> System.out.println(a + " : " + b));
     }
 }
