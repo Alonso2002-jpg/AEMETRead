@@ -40,8 +40,8 @@ public class Main {
 //        System.out.println(obj2);
 
         //Obteniendo Objeto por Localidad
-        var obj3 = aemetImpl.findByLocalidad("ñ");
-        obj3.forEach(System.out::println);
+//        var obj3 = aemetImpl.findByLocalidad("ñ");
+//        obj3.forEach(System.out::println);
 
         //Eliminando Objeto por ID
         //var suc = aemetImpl.deleteById(5);
