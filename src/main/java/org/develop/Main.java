@@ -2,6 +2,7 @@ package org.develop;
 
 import org.develop.model.Aemet;
 import org.develop.repository.AEMETrepositoryImpl;
+import org.develop.services.controllers.AEMETcontroller;
 import org.develop.services.database.DatabaseManager;
 import org.develop.services.file.ReadCSVAemet;
 
@@ -25,29 +26,33 @@ public class Main {
         });
 
         //Actualizando Objeto de la base de datos
-        Aemet obj1 = aemetImpl.findById(5).get();
-        System.out.println(obj1);
-        obj1.setPrecipitation(1.20);
-        var obj11=aemetImpl.update(obj1);
-        System.out.println(obj11);
+//        Aemet obj1 = aemetImpl.findById(5).get();
+//        System.out.println(obj1);
+//        obj1.setPrecipitation(1.20);
+//        var obj11=aemetImpl.update(obj1);
+//        System.out.println(obj11);
         //Obteniendo todos los Objetos de la Base de datos.
         //aemetImpl.findAll().forEach(System.out::println);
 
         //Obteniendo Objeto por ID
-        var obj2 = aemetImpl.findById(1);
-        System.out.println(obj2);
+//        var obj2 = aemetImpl.findById(1);
+//        System.out.println(obj2);
 
         //Obteniendo Objeto por Localidad
-        var obj3 = aemetImpl.findByLocalidad("ñ");
+        var obj3 = aemetImpl.findByLocalidad("Ã±");
         obj3.forEach(System.out::println);
 
         //Eliminando Objeto por ID
-        var suc = aemetImpl.deleteById(5);
-        System.out.println(suc);
+        //var suc = aemetImpl.deleteById(5);
+        //System.out.println(suc);
         //Eliminando Todos los Objetos de la Bsee Datos
-        aemetImpl.deleteAll();
+        //aemetImpl.deleteAll();
 
         //Implementacion CONTROLLER STREAMS.
+        var list = aemetImpl.findAll();
+        AEMETcontroller aemeTcontroller = new AEMETcontroller(list);
+        aemeTcontroller.ejecutarOperaciones();
+        aemeTcontroller.getDatosProv("Burgos");
 
     }
 }
