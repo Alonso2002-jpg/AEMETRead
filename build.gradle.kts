@@ -21,6 +21,9 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.11")
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation("com.opencsv:opencsv:5.8")
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+    implementation("org.apache.commons:commons-csv:1.10.0")
+
         // Ibatis lo usaremos para leer los scripts SQL desde archivos
     implementation("org.mybatis:mybatis:3.5.13")
 }
