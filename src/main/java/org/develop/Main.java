@@ -5,6 +5,7 @@ import org.develop.repository.AEMETrepositoryImpl;
 import org.develop.services.controllers.AEMETcontroller;
 import org.develop.services.database.DatabaseManager;
 import org.develop.services.file.ReadCSVAemet;
+import org.develop.services.file.WriteJSONAemet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -54,5 +55,8 @@ public class Main {
         aemeTcontroller.ejecutarOperaciones();
         aemeTcontroller.getDatosProv("Burgos");
 
+        var listProv = aemeTcontroller.dataProv("Madrid");
+        WriteJSONAemet write = new WriteJSONAemet();
+        System.out.println(write.writeJSON("MadridData.json",listProv));
     }
 }

@@ -18,6 +18,12 @@ public class AEMETcontroller {
         this.temps = temps;
     }
 
+    public List<Aemet> dataProv(String provincia){
+        return temps.stream()
+                .filter(pr -> provincia.equalsIgnoreCase(pr.getProvincia()))
+                .toList();
+    }
+
     public void maxminTempXDay(){
         logger.debug("¿Dónde se dio la temperatura máxima y mínima total en cada uno de los días?");
         var max =  temps.stream()
