@@ -1,7 +1,10 @@
 package org.develop.services.database;
 
 
+import lombok.extern.java.Log;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.sql.Connection;
@@ -15,6 +18,7 @@ public class DatabaseManager {
     private static DatabaseManager instance;
     private Connection connection;
     private PreparedStatement preparedStatement;
+    private Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
     private String serverUrl;
     private String dataBaseName;
     private boolean chargeTables;
@@ -26,12 +30,13 @@ public class DatabaseManager {
         try {
             configFromProperties();
             openConnection();
+            logger.debug("Connection Successfully");
             if (chargeTables){
-                executeScript(initScript,true);
+                executeScript(initScript,false);
+                logger.debug("Init Script Successfully");
             }
-            System.out.println("Successfully");
         }catch (SQLException | FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error("Error : " + e.getMessage(),e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -49,7 +54,7 @@ public class DatabaseManager {
             try{
                 openConnection();
             }catch (SQLException e){
-                e.printStackTrace();
+               logger.error("Error : " + e.getMessage(),e);
             }
         }
         return connection;
@@ -70,7 +75,7 @@ public class DatabaseManager {
         properties.load(DatabaseManager.class.getClassLoader().getResourceAsStream("config.properties"));
 
         serverUrl= properties.getProperty("database.url","jdbc:sqlite");
-        dataBaseName = properties.getProperty("database.name","Pokemon");
+        dataBaseName = properties.getProperty("database.name","Amet");
         chargeTables=Boolean.parseBoolean(properties.getProperty("database.initDatabase","false"));
         conURL =properties.getProperty("database.connectionUrl", serverUrl + ":"+dataBaseName + ".db");
         System.out.println(conURL);

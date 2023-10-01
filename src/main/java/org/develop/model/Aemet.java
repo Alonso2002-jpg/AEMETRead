@@ -3,6 +3,7 @@ package org.develop.model;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 public class Aemet {
@@ -14,6 +15,6 @@ public class Aemet {
     private double minDegrees;
     private double precipitation;
 
-    private String maxTempHour;
-    private String minTempHour;
+    private LocalTime maxTempHour;
+    private LocalTime minTempHour;
 }
