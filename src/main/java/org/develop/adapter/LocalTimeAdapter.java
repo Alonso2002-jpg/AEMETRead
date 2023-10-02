@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * La clase LocalTimeAdapter es un adaptador personalizado para la serializacion y deserializacion de objetos
- * {@code LocalTime} en formato JSON utilizando la biblioteca Gson. Permite convertir objetos LocalTime a formato de cadena
+ * LocalTime en formato JSON utilizando la biblioteca Gson. Permite convertir objetos LocalTime a formato de cadena
  * JSON y viceversa utilizando el patron "HH:mm".
  */
 public class LocalTimeAdapter extends TypeAdapter<LocalTime> {
