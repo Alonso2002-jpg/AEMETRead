@@ -5,6 +5,11 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * La clase Aemet representa datos climaticos.
+ * Contiene informacion sobre la fecha actual, la provincia y localidad asociadas, las temperaturas maximas y minimas,
+ * y la cantidad de precipitacion registrada.
+ */
 @Data
 public class Aemet {
     private Integer id;

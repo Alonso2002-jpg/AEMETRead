@@ -15,10 +15,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Esta clase se encarga de leer archivos CSV y convertirlos en objetos Aemet.
+ */
 public class ReadCSVAemet {
 
+    // Ruta al directorio de datos
     String pathData=Paths.get("").toAbsolutePath().toString() + File.separator + "data" + File.separator;
 
+    /**
+     * Convierte un archivo a codificación UTF-8.
+     * @param inputFile  El archivo de entrada con codificacion windows-1252.
+     * @param outputFile El archivo de salida con codificacion UTF-8.
+     * @return La ruta al archivo de salida con codificacion UTF-8.
+     * @throws IOException Si ocurre un error durante la conversion.
+     */
     public static String convertFileToUTF8(String inputFile, String outputFile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "windows-1252"));
              BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
@@ -32,6 +43,11 @@ public class ReadCSVAemet {
         return outputFile;
     }
 
+    /**
+     * Lee un archivo CSV y devuelve una lista de objetos Aemet.
+     * @param nomFinch El nombre del archivo CSV a leer.
+     * @return Una lista de objetos Aemet.
+     */
     public List<Aemet> readFile(String nomFinch){
         String path = pathData + nomFinch;
         List<Aemet> tempXDay = new ArrayList<>();
@@ -71,9 +87,15 @@ public class ReadCSVAemet {
         return tempXDay;
     }
 
+    /**
+     * Lee varios archivos CSV de dias especificos y devuelve una lista de objetos Aemet.
+     * @return Una lista de objetos Aemet de varios archivos CSV.
+     * @throws IOException Si ocurre un error durante la lectura de archivos.
+     */
     public ArrayList<Aemet> readFilesDays() throws IOException {
         ArrayList<Aemet> days = new ArrayList<>();
 
+        // Leer y agregar datos de varios archivos CSV de días específicos
         days.addAll(readFile(ReadCSVAemet.convertFileToUTF8(pathData + "Aemet20171029.csv","Aemet20171029r.csv")));
         days.addAll(readFile(ReadCSVAemet.convertFileToUTF8(pathData + "Aemet20171030.csv","Aemet20171030r.csv")));
         days.addAll(readFile(ReadCSVAemet.convertFileToUTF8(pathData + "Aemet20171031.csv","Aemet20171031r.csv")));

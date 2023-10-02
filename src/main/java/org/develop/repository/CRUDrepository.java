@@ -4,6 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interfaz generica para definir operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una base de datos.
+ * @param <T>  El tipo de entidad.
+ * @param <ID> El tipo del identificador unico.
+ */
 public interface CRUDrepository<T,ID> {
 
        // Guardar

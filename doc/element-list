@@ -1,0 +1,7 @@
+org.develop
+org.develop.adapter
+org.develop.model
+org.develop.repository
+org.develop.services.controllers
+org.develop.services.database
+org.develop.services.file

@@ -11,14 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementacion de la interfaz AEMETrepository que proporciona metodos para interactuar con la base de datos.
+ */
 public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
     private static AEMETrepositoryImpl instance;
     private final DatabaseManager db;
 
     private final Logger logger = LoggerFactory.getLogger(AEMETrepositoryImpl.class);
 
+    /**
+     * Constructor privado para crear una instancia de AEMETrepositoryImpl.
+     * @param db El administrador de la base de datos.
+     */
     private AEMETrepositoryImpl(DatabaseManager db){this.db = db;}
 
+    /**
+     * Obtiene una instancia unica de AEMETrepositoryImpl.
+     * @param db El administrador de la base de datos.
+     * @return La instancia unica de AEMETrepositoryImpl.
+     */
     public static AEMETrepositoryImpl getInstance(DatabaseManager db){
         if (instance==null){
             instance=new AEMETrepositoryImpl(db);
@@ -26,6 +38,12 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         return instance;
     }
 
+    /**
+     * Guarda un objeto Aemet en la base de datos.
+     * @param aemet El objeto Aemet que se va a guardar.
+     * @return El objeto Aemet despues de ser guardado en la base de datos con su identificador unico actualizado.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
     @Override
     public Aemet save(Aemet aemet) throws SQLException {
         logger.debug("Saving Objeto AEMET en la Base de Datos");
@@ -59,6 +77,12 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         return aemet;
     }
 
+    /**
+     * Actualiza un objeto Aemet en la base de datos con la informacion proporcionada en el objeto Aemet dado.
+     * @param aemet El objeto Aemet que se va a actualizar en la base de datos.
+     * @return El objeto Aemet despues de ser actualizado en la base de datos.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
     @Override
     public Aemet update(Aemet aemet) throws SQLException {
         logger.debug("Updating Object Aemet con ID: " + aemet.getId());
@@ -80,6 +104,11 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         return aemet;
     }
 
+    /**
+     * Busca un objeto Aemet en la base de datos por su identificador unico.
+     * @param id El identificador unico del objeto Aemet que se desea buscar.
+     * @return Un objeto Optional que contiene el objeto Aemet encontrado, o un Optional vacio si no se encuentra ningun objeto con el ID dado.
+     */
     @Override
     public Optional<Aemet> findById(Integer id){
         logger.debug("Finding Object AEMET with ID: " + id);
@@ -109,6 +138,10 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         return aemetOpt;
     }
 
+    /**
+     * Obtiene todos los objetos Aemet almacenados en la base de datos.
+     * @return Una lista de objetos Aemet que representan todos los datos de la base de datos.
+     */
     @Override
     public List<Aemet> findAll(){
         logger.debug("Obteniedo Todos los Datos de la Base de datos");
@@ -135,6 +168,11 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         return tempDays;
     }
 
+    /**
+     * Elimina un objeto Aemet de la base de datos por su identificador unico.
+     * @param id El identificador unico del objeto Aemet que se desea eliminar.
+     * @return `true` si se elimina con exito, `false` si no se encuentra ningun objeto con el ID dado o si ocurre un error al eliminar.
+     */
     @Override
     public boolean deleteById(Integer id){
         logger.debug("Deleting Object with ID: " + id);
@@ -153,6 +191,9 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
         return success;
     }
 
+    /**
+     * Elimina todos los objetos Aemet almacenados en la base de datos.
+     */
     @Override
     public void deleteAll(){
         logger.debug("Deleting All Objects from Aemet");
@@ -165,6 +206,11 @@ public class AEMETrepositoryImpl implements AEMETrepository<Aemet, Integer> {
     }
 
 
+    /**
+     * Busca objetos Aemet en la base de datos por el nombre de la localidad que contiene la cadena especificada.
+     * @param localidad La cadena que se utiliza para buscar objetos Aemet por el nombre de la localidad.
+     * @return Una lista de objetos Aemet que contienen la cadena especificada en el nombre de la localidad.
+     */
     @Override
     public List<Aemet> findByLocalidad(String localidad) {
         logger.debug("Finding by Localidad what contains: " + localidad);
